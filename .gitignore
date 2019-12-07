@@ -5,6 +5,5 @@ target
 test.db
 log
 *.log
-*.txt
 *.pdf
 eng.traineddata
