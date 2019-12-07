@@ -30,6 +30,7 @@ public class TessUtil {
 		File image = new File(pdfFile);
 		val tessInst = new Tesseract();
 		tessInst.setLanguage("eng");
+		tessInst.setTessVariable("user_defined_dpi", "300");
 		String result = tessInst.doOCR(image).replaceAll("\r", " ").replaceAll("\n", " ").replaceAll("( )+", " ")
 				.replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("\"", "").replaceAll("”", "")
 				.replaceAll("\\[", "").replaceAll("\\]", "").trim();
