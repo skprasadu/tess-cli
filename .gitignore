@@ -1,0 +1,10 @@
+target
+.settings
+.project
+.classpath
+test.db
+log
+*.log
+*.txt
+*.pdf
+eng.traineddata
