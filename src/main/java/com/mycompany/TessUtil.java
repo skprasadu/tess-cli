@@ -34,6 +34,8 @@ public class TessUtil {
 		
 		System.out.println("result=" + result);
 
+		System.out.println("==============================================");
+
 		val map = getData(regex, result);
 
 		System.out.println(map);
