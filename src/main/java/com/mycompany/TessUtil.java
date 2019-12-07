@@ -3,9 +3,6 @@ package com.mycompany;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -24,7 +21,7 @@ public class TessUtil {
 		extractOcrData(args[0]);
 	}
 
-	public static String extractOcrData(String pdfFile) throws IOException, FileNotFoundException, TesseractException {
+	public static Map<String, String>  extractOcrData(String pdfFile) throws IOException, FileNotFoundException, TesseractException {
 		String regex = IOUtils.toString(TessUtil.class.getResourceAsStream("/copyright-regex.txt"));
 
 		File image = new File(pdfFile);
@@ -39,19 +36,8 @@ public class TessUtil {
 
 		val map = getData(regex, result);
 
-		val temData = IOUtils.toString(TessUtil.class.getResourceAsStream("/copyright-template.tem"));
-
-		DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-		String date = sdf.format(new Date());
-
-		String temp = String.format(temData, date, map.get("licensee"), map.get("licenseeState"),
-				map.get("licenseeEntityType"), map.get("licenseeAddress"), map.get("licensor"),
-				map.get("licensorState"), map.get("licensorEntityType"), map.get("licensorAddress"),
-				map.get("territory"), map.get("purposeDescription"), map.get("workDescription"), map.get("amountText"),
-				map.get("amount"), map.get("paymentProcedure"));
-
-		System.out.println(temp);
-		return temp;
+		System.out.println(map);
+		return map;
 	}
 
 	public static Map<String, String> getData(String regex, String data) {
