@@ -29,9 +29,9 @@ public class TessUtil {
 		String regex = IOUtils.toString(new FileInputStream("./" + split[0] + ".tem")).replaceAll("\r", " ")
 				.replaceAll("\n", " ").replaceAll("( )+", " ").trim();
 
-		System.out.println("regex=" + regex);
+		//System.out.println("regex=" + regex);
 
-		System.out.println("==============================================");
+		//System.out.println("==============================================");
 
 		File image = new File(pdfFile);
 		val tessInst = new Tesseract();
@@ -41,9 +41,9 @@ public class TessUtil {
 				.replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("\"", "").replaceAll("”", "")
 				.replaceAll("\\[", "").replaceAll("\\]", "").trim();
 
-		System.out.println("result=" + result);
+		//System.out.println("result=" + result);
 
-		System.out.println("==============================================");
+		//System.out.println("==============================================");
 
 		val map = getData(regex, result);
 
