@@ -1,6 +1,7 @@
 package com.mycompany;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
@@ -21,8 +22,16 @@ public class TessUtil {
 		extractOcrData(args[0]);
 	}
 
-	public static Map<String, String>  extractOcrData(String pdfFile) throws IOException, FileNotFoundException, TesseractException {
-		String regex = IOUtils.toString(TessUtil.class.getResourceAsStream("/copyright-regex.txt"));
+	public static Map<String, String> extractOcrData(String pdfFile)
+			throws IOException, FileNotFoundException, TesseractException {
+		String[] split = pdfFile.split("\\.");
+
+		String regex = IOUtils.toString(new FileInputStream("./" + split[0] + ".tem")).replaceAll("\r", " ")
+				.replaceAll("\n", " ").replaceAll("( )+", " ").trim();
+
+		System.out.println("regex=" + regex);
+
+		System.out.println("==============================================");
 
 		File image = new File(pdfFile);
 		val tessInst = new Tesseract();
@@ -31,7 +40,7 @@ public class TessUtil {
 		String result = tessInst.doOCR(image).replaceAll("\r", " ").replaceAll("\n", " ").replaceAll("( )+", " ")
 				.replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("\"", "").replaceAll("”", "")
 				.replaceAll("\\[", "").replaceAll("\\]", "").trim();
-		
+
 		System.out.println("result=" + result);
 
 		System.out.println("==============================================");
