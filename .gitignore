@@ -5,5 +5,4 @@ target
 test.db
 log
 *.log
-*.pdf
 eng.traineddata
